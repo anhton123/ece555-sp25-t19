@@ -1,5 +1,5 @@
 # Summary
-This repo contains all code created by T19 of Spring '25 ECE455/555 Final Project.
+This repo contains all code created by Sp'25 ECE455/555 T19.
 
 ## System Info
 To obtain the system information of a device, run `./src/scripts/system-info.sh`.
