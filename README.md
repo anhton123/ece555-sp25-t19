@@ -34,3 +34,19 @@ Confidence ---> 0.93
 Class name --> person
 Speed: 6.3ms preprocess, 96.6ms inference, 6.4ms postprocess per image at shape (1, 3, 480, 640)
 ```
+
+## Accelerometer
+To run the accelerometer app:
+1. `cd src/accelerometer`
+2. `make accel`
+3. `./accelerometer`
+ 
+You will get accelerometer results looking like this:
+````bash
+-----------------------------
+Iteration 0
+X-Axis Acceleration: 244 
+Y-Axis Acceleration: 81 
+Z-Axis Acceleration: 7 
+-----------------------------
+```
