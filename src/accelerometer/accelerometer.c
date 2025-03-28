@@ -12,9 +12,9 @@
 #include <fcntl.h>
 
 typedef struct {
-	int x_accl;
-	int y_accl;
-	int z_accl;
+	float x_accl;
+	float y_accl;
+	float z_accl;
 } accelerometer;
 
 // initializes the adxl345 device
@@ -69,15 +69,18 @@ void adxl345_get_accel(const int fd, accelerometer *a) {
 	}
 	else
 	{
-		// Convert the data to 10-bits
+		// Convert accelerometer to be between -9.81 to 9.81
 		a->x_accl = ((data[1] & 0x03) * 256 + (data[0] & 0xFF));
 		if(a->x_accl > 511) a->x_accl -= 1024;
+		a->x_accl = ((a->x_accl * 9.81)/ 255);
 
 		a->y_accl = ((data[3] & 0x03) * 256 + (data[2] & 0xFF));
 		if(a->y_accl > 511) a->y_accl -= 1024;
+		a->y_accl = ((a->y_accl * 9.81)/ 255);
 
 		a->z_accl = ((data[5] & 0x03) * 256 + (data[4] & 0xFF));
 		if(a->z_accl > 511) a->z_accl -= 1024;
+		a->z_accl = ((a->z_accl * 9.81) / 255);
 	}
 }
 
@@ -100,9 +103,9 @@ int main()
 		adxl345_get_accel(fd, accl);
 		printf("-----------------------------\n");
 		printf("Iteration %d\n", i);
-		printf("X-Axis Acceleration: %d \n", accl->x_accl);
-		printf("Y-Axis Acceleration: %d \n", accl->y_accl);
-		printf("Z-Axis Acceleration: %d \n", accl->z_accl);
+		printf("X-Axis Acceleration: %.4f\n", accl->x_accl);
+		printf("Y-Axis Acceleration: %.4f\n", accl->y_accl);
+		printf("Z-Axis Acceleration: %.4f\n", accl->z_accl);
 		printf("-----------------------------\n");
 		usleep(sleep_duration_us);
 	}
