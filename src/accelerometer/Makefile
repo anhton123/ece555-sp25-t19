@@ -1,5 +1,5 @@
 cpu:
-	gcc cpu_accelerometer.c -o cpu_accelerometer
+	gcc cpu_accelerometer.c -o cpu_accelerometer -lm
 
 
 gpu:
